@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.databinding.ContactCellBinding
+import br.com.lucolimac.qrmanager.databinding.FavoriteLinkCellBinding
 
 class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickListener) :
     ListAdapter<FavoriteLink, FavoriteLinkAdapter.ContactViewHolder>(diffCallback), Filterable {
-    private lateinit var binding: ContactCellBinding
+    private lateinit var binding: FavoriteLinkCellBinding
     private var originalList = arrayListOf<FavoriteLink>()
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ContactViewHolder {
-        binding = ContactCellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = FavoriteLinkCellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ContactViewHolder(binding)
     }
 
@@ -25,7 +25,7 @@ class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickLi
         holder.bind(getItem(position))
     }
 
-    inner class ContactViewHolder(private val view: ContactCellBinding) :
+    inner class ContactViewHolder(private val view: FavoriteLinkCellBinding) :
         RecyclerView.ViewHolder(view.root) {
         fun bind(favoriteLink: FavoriteLink) {
             view.name.text = favoriteLink.title
