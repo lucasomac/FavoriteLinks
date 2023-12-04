@@ -15,25 +15,28 @@ import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.qrmanager.FavoriteLinksDatabase
 import br.com.lucolimac.qrmanager.R
 import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.databinding.FragmentContactDetailBinding
+import br.com.lucolimac.qrmanager.databinding.FragmentFavoriteLinkDetailBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FavoriteLinkDetailFragment : Fragment() {
-    private var _binding: FragmentContactDetailBinding? = null
+    private var _binding: FragmentFavoriteLinkDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var favoriteLink: FavoriteLink
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentContactDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteLinkDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        favoriteLink = requireArguments().getParcelable("favoriteLink", FavoriteLink::class.java) as FavoriteLink
+        favoriteLink = requireArguments().getParcelable(
+            "favoriteLink",
+            FavoriteLink::class.java
+        ) as FavoriteLink
         with(binding.commonLayout) {
             editTextName.setText(favoriteLink.title)
             editTextPhone.setText(favoriteLink.description)
@@ -50,9 +53,13 @@ class FavoriteLinkDetailFragment : Fragment() {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
                     R.id.actionChangeContact -> {
-                        val db = FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
+                        val db =
+                            FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
                         val favoriteLinkUpdate = FavoriteLink(
-                            favoriteLink.id, favoriteLink.title, favoriteLink.description, favoriteLink.url
+                            favoriteLink.id,
+                            favoriteLink.title,
+                            favoriteLink.description,
+                            favoriteLink.url
                         )
                         CoroutineScope(Dispatchers.IO).launch {
                             db.contactDAO().updateQrCode(favoriteLinkUpdate)
@@ -62,7 +69,8 @@ class FavoriteLinkDetailFragment : Fragment() {
                     }
 
                     R.id.actionDeleteContact -> {
-                        val db = FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
+                        val db =
+                            FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
                         CoroutineScope(Dispatchers.IO).launch {
                             db.contactDAO().deleteQrCode(favoriteLink)
                         }
