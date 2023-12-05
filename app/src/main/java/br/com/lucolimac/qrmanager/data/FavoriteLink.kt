@@ -11,5 +11,6 @@ data class FavoriteLink(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
     val description: String?,
-    val url: String
+    val url: String,
+    val counter: Long = 0
 ) : Parcelable

@@ -28,8 +28,9 @@ class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickLi
     inner class ContactViewHolder(private val view: FavoriteLinkCellBinding) :
         RecyclerView.ViewHolder(view.root) {
         fun bind(favoriteLink: FavoriteLink) {
-            view.name.text = favoriteLink.title
-            view.phone.text = favoriteLink.title
+            view.title.text = favoriteLink.title
+            view.descriptionSubject.text = favoriteLink.description
+            view.counterEntrance.text = favoriteLink.counter.toString()
             view.root.setOnClickListener {
                 onFavoriteClickListener.onFavoriteLinkClick(favoriteLink)
             }

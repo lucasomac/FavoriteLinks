@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -13,6 +14,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:padding="16dp"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -21,24 +23,28 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    tools:text="Title" />
 
                 <TextView
-                    android:id="@+id/phone"
+                    android:id="@+id/descriptionSubject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    tools:text="Descricao" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/fav_icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/counterEntrance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:textSize="18sp"
+                tools:text="0" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

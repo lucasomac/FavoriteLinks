@@ -17,7 +17,7 @@ abstract class FavoriteLinksDatabase : RoomDatabase() {
         fun getDatabase(context: Context): FavoriteLinksDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext, FavoriteLinksDatabase::class.java, "favoritelink.db"
+                    context.applicationContext, FavoriteLinksDatabase::class.java, "favoritelinks.db"
                 ).build()
                 INSTANCE = instance
                 instance
