@@ -15,19 +15,19 @@ import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.qrmanager.FavoriteLinksDatabase
 import br.com.lucolimac.qrmanager.R
 import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.databinding.FragmentContactRegisterBinding
+import br.com.lucolimac.qrmanager.databinding.FragmentFavoriteLinkRegisterBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FavoriteLinkRegisterFragment : Fragment() {
-    private var _binding: FragmentContactRegisterBinding? = null
+    private var _binding: FragmentFavoriteLinkRegisterBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentContactRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteLinkRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
