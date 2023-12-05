@@ -74,7 +74,7 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
         val db = FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
         var contactsList: List<FavoriteLink>
         CoroutineScope(Dispatchers.IO).launch {
-            contactsList = db.contactDAO().getFavoriteLinksByTitle()
+            contactsList = db.contactDAO().getFavoriteLinks()
             favoriteLinkAdapter = FavoriteLinkAdapter(this@FavoriteLinksListFragment).apply {
                 submitList(contactsList)
             }
@@ -90,5 +90,9 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
         findNavController().navigate(
             R.id.action_contactsListFragment_to_contactDetailFragment, bundle
         )
+    }
+
+    override fun onFavoriteLinkCLongClick(favoriteLink: FavoriteLink) {
+        TODO("Not yet implemented")
     }
 }
