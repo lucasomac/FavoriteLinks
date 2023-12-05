@@ -1,7 +1,6 @@
 package br.com.lucolimac.qrmanager.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.qrmanager.FavoriteLinksDatabase
@@ -18,20 +18,20 @@ import br.com.lucolimac.qrmanager.R
 import br.com.lucolimac.qrmanager.adapter.FavoriteLinkAdapter
 import br.com.lucolimac.qrmanager.adapter.OnFavoriteClickListener
 import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.databinding.FragmentContactsListBinding
+import br.com.lucolimac.qrmanager.databinding.FragmentFavoriteLinksListBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
-    private var _binding: FragmentContactsListBinding? = null
+    private var _binding: FragmentFavoriteLinksListBinding? = null
     private val binding get() = _binding!!
     private lateinit var favoriteLinkAdapter: FavoriteLinkAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentContactsListBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteLinksListBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_contactsListFragment_to_registerFragment)
@@ -72,9 +72,9 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
 
     private fun updateUI() {
         val db = FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
-        var contactsList: ArrayList<FavoriteLink>
+        var contactsList: List<FavoriteLink>
         CoroutineScope(Dispatchers.IO).launch {
-            contactsList = db.contactDAO().getQrCodeByName() as ArrayList<FavoriteLink>
+            contactsList = db.contactDAO().getQrCodeByName()
             favoriteLinkAdapter = FavoriteLinkAdapter(this@FavoriteLinksListFragment).apply {
                 submitList(contactsList)
             }
