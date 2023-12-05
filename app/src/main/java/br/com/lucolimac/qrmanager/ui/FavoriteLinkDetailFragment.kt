@@ -62,7 +62,7 @@ class FavoriteLinkDetailFragment : Fragment() {
                             favoriteLink.url
                         )
                         CoroutineScope(Dispatchers.IO).launch {
-                            db.contactDAO().updateQrCode(favoriteLinkUpdate)
+                            db.contactDAO().updateFavoriteLink(favoriteLinkUpdate)
                         }
                         findNavController().popBackStack()
                         true
@@ -72,7 +72,7 @@ class FavoriteLinkDetailFragment : Fragment() {
                         val db =
                             FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
                         CoroutineScope(Dispatchers.IO).launch {
-                            db.contactDAO().deleteQrCode(favoriteLink)
+                            db.contactDAO().deleteFavoriteLink(favoriteLink)
                         }
                         findNavController().popBackStack()
                         true

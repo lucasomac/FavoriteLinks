@@ -74,7 +74,7 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
         val db = FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
         var contactsList: List<FavoriteLink>
         CoroutineScope(Dispatchers.IO).launch {
-            contactsList = db.contactDAO().getQrCodeByName()
+            contactsList = db.contactDAO().getFavoriteLinksByTitle()
             favoriteLinkAdapter = FavoriteLinkAdapter(this@FavoriteLinksListFragment).apply {
                 submitList(contactsList)
             }
@@ -84,7 +84,7 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
         }
     }
 
-    override fun onQrCodeClick(favoriteLink: FavoriteLink) {
+    override fun onFavoriteLinkClick(favoriteLink: FavoriteLink) {
         val bundle = Bundle()
         bundle.putParcelable("favoriteLink", favoriteLink)
         findNavController().navigate(

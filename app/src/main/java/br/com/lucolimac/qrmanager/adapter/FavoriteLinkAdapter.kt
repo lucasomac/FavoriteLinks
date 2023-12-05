@@ -31,7 +31,7 @@ class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickLi
             view.name.text = favoriteLink.title
             view.phone.text = favoriteLink.title
             view.root.setOnClickListener {
-                onFavoriteClickListener.onQrCodeClick(favoriteLink)
+                onFavoriteClickListener.onFavoriteLinkClick(favoriteLink)
             }
         }
     }

@@ -11,15 +11,15 @@ interface FavoriteLinkDAO {
     @Insert
     fun createContact(favoriteLink: FavoriteLink)
 
-    @Query("SELECT * FROM qrcode ORDER BY title")
-    suspend fun getQrCodeByName(): List<FavoriteLink>
+    @Query("SELECT * FROM favoritelink WHERE title = :title ORDER BY title")
+    suspend fun getFavoriteLinksByTitle(title: String): List<FavoriteLink>
 
-    @Query("SELECT * FROM qrcode")
-    suspend fun getQrCode(): List<FavoriteLink>
+    @Query("SELECT * FROM favoritelink ORDER BY title")
+    suspend fun getFavoriteLinks(): List<FavoriteLink>
 
     @Update
-    suspend fun updateQrCode(favoriteLink: FavoriteLink)
+    suspend fun updateFavoriteLink(favoriteLink: FavoriteLink)
 
     @Delete
-    suspend fun deleteQrCode(favoriteLink: FavoriteLink)
+    suspend fun deleteFavoriteLink(favoriteLink: FavoriteLink)
 }
