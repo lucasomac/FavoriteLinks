@@ -1,4 +1,4 @@
-package br.com.lucolimac.qrmanager
+package br.com.lucolimac.favoritelinks
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("br.com.lucolimac.qrmanager", appContext.packageName)
+        assertEquals("br.com.lucolimac.favoritelinks", appContext.packageName)
     }
 }

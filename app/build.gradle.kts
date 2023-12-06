@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "br.com.lucolimac.qrmanager"
+    namespace = "br.com.lucolimac.favoritelinks"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "br.com.lucolimac.qrmanager"
+        applicationId = "br.com.lucolimac.favoritelinks"
         minSdk = 33
         targetSdk = 34
         versionCode = 1
@@ -46,6 +46,7 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 //    implementation("com.github.kenglxn.QRGen:android:3.0.1")
+    implementation("io.insert-koin:koin-android:3.5.0")
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")

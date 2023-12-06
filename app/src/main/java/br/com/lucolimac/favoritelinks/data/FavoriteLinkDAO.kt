@@ -1,4 +1,4 @@
-package br.com.lucolimac.qrmanager.data
+package br.com.lucolimac.favoritelinks.data
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -9,7 +9,7 @@ import androidx.room.Update
 @Dao
 interface FavoriteLinkDAO {
     @Insert
-    fun createContact(favoriteLink: FavoriteLink)
+    fun createFavoriteLink(favoriteLink: FavoriteLink)
 
     @Query("SELECT * FROM favoritelink WHERE title = :title ORDER BY title")
     suspend fun getFavoriteLinksByTitle(title: String): List<FavoriteLink>

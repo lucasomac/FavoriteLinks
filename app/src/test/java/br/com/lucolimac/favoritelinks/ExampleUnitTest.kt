@@ -1,4 +1,4 @@
-package br.com.lucolimac.qrmanager
+package br.com.lucolimac.favoritelinks
 
 import org.junit.Test
 

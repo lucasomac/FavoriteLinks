@@ -1,15 +1,15 @@
-package br.com.lucolimac.qrmanager
+package br.com.lucolimac.favoritelinks.framework
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.data.FavoriteLinkDAO
+import br.com.lucolimac.favoritelinks.data.FavoriteLink
+import br.com.lucolimac.favoritelinks.data.FavoriteLinkDAO
 
 @Database(entities = [FavoriteLink::class], version = 1)
 abstract class FavoriteLinksDatabase : RoomDatabase() {
-    abstract fun contactDAO(): FavoriteLinkDAO
+    abstract fun favoriteLinkDAO(): FavoriteLinkDAO
 
     companion object {
         @Volatile

@@ -1,14 +1,17 @@
-package br.com.lucolimac.qrmanager.adapter
+package br.com.lucolimac.favoritelinks.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.databinding.FavoriteLinkCellBinding
+import br.com.lucolimac.favoritelinks.R
+import br.com.lucolimac.favoritelinks.data.FavoriteLink
+import br.com.lucolimac.favoritelinks.databinding.FavoriteLinkCellBinding
+import br.com.lucolimac.favoritelinks.ui.componnets.OnFavoriteClickListener
 
 class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickListener) :
     ListAdapter<FavoriteLink, FavoriteLinkAdapter.ContactViewHolder>(diffCallback), Filterable {
@@ -17,7 +20,8 @@ class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickLi
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ContactViewHolder {
-        binding = FavoriteLinkCellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding =
+            FavoriteLinkCellBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ContactViewHolder(binding)
     }
 
@@ -33,6 +37,27 @@ class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickLi
             view.counterEntrance.text = favoriteLink.counter.toString()
             view.root.setOnClickListener {
                 onFavoriteClickListener.onFavoriteLinkClick(favoriteLink)
+            }
+            view.root.setOnLongClickListener {
+                val popupMenu = PopupMenu(it.context, it)
+
+                // Inflating popup menu from popup_menu.xml file
+                popupMenu.menuInflater.inflate(R.menu.detail_menu, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.actionChangeFavoriteLink -> onFavoriteClickListener.onEditClick(
+                            favoriteLink
+                        )
+
+                        R.id.actionDeleteFavoriteLink -> onFavoriteClickListener.onDeleteClick(
+                            favoriteLink
+                        )
+
+                    }
+                    true
+                }
+                popupMenu.show()
+                true
             }
         }
     }

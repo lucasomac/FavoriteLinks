@@ -1,4 +1,4 @@
-package br.com.lucolimac.qrmanager.ui
+package br.com.lucolimac.favoritelinks.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,17 +12,16 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
-import br.com.lucolimac.qrmanager.FavoriteLinksDatabase
-import br.com.lucolimac.qrmanager.R
-import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.databinding.FragmentFavoriteLinkRegisterBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import br.com.lucolimac.favoritelinks.R
+import br.com.lucolimac.favoritelinks.data.FavoriteLink
+import br.com.lucolimac.favoritelinks.databinding.FragmentFavoriteLinkRegisterBinding
+import br.com.lucolimac.favoritelinks.ui.viewmodel.FavoriteLinkViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteLinkRegisterFragment : Fragment() {
     private var _binding: FragmentFavoriteLinkRegisterBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: FavoriteLinkViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,14 +42,11 @@ class FavoriteLinkRegisterFragment : Fragment() {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
                     R.id.actionSaveContact -> {
-                        val name = binding.commonLayout.editTextName.text.toString()
-                        val phone = binding.commonLayout.editTextPhone.text.toString()
-                        val email = binding.commonLayout.editTextEmail.text.toString()
+                        val name = binding.commonLayout.editTextTitle.text.toString()
+                        val phone = binding.commonLayout.editTextDescription.text.toString()
+                        val email = binding.commonLayout.editTextUrl.text.toString()
                         val favoriteLink = FavoriteLink(0, name, phone, email)
-                        val db = FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
-                        CoroutineScope(Dispatchers.IO).launch {
-                            db.contactDAO().createContact(favoriteLink)
-                        }
+                        viewModel.createFavoriteLink(favoriteLink)
                         findNavController().popBackStack()
                         true
                     }

@@ -1,4 +1,4 @@
-package br.com.lucolimac.qrmanager
+package br.com.lucolimac.favoritelinks.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import br.com.lucolimac.qrmanager.databinding.ActivityMainBinding
+import br.com.lucolimac.favoritelinks.R
+import br.com.lucolimac.favoritelinks.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration

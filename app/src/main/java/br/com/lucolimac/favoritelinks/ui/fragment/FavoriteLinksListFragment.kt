@@ -1,4 +1,4 @@
-package br.com.lucolimac.qrmanager.ui
+package br.com.lucolimac.favoritelinks.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,35 +12,42 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import br.com.lucolimac.qrmanager.FavoriteLinksDatabase
-import br.com.lucolimac.qrmanager.R
-import br.com.lucolimac.qrmanager.adapter.FavoriteLinkAdapter
-import br.com.lucolimac.qrmanager.adapter.OnFavoriteClickListener
-import br.com.lucolimac.qrmanager.data.FavoriteLink
-import br.com.lucolimac.qrmanager.databinding.FragmentFavoriteLinksListBinding
-import kotlinx.coroutines.CoroutineScope
+import br.com.lucolimac.favoritelinks.R
+import br.com.lucolimac.favoritelinks.data.FavoriteLink
+import br.com.lucolimac.favoritelinks.databinding.FragmentFavoriteLinksListBinding
+import br.com.lucolimac.favoritelinks.ui.adapter.FavoriteLinkAdapter
+import br.com.lucolimac.favoritelinks.ui.componnets.OnFavoriteClickListener
+import br.com.lucolimac.favoritelinks.ui.viewmodel.FavoriteLinkViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
     private var _binding: FragmentFavoriteLinksListBinding? = null
     private val binding get() = _binding!!
     private lateinit var favoriteLinkAdapter: FavoriteLinkAdapter
+    private val viewModel: FavoriteLinkViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavoriteLinksListBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_contactsListFragment_to_registerFragment)
+            findNavController().navigate(R.id.actionListToRegister)
         }
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getFavoriteLinks()
+        }
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -63,21 +70,28 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
                 TODO("Not yet implemented")
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.listOfFavoriteLinks.collect {
+                    updateUI(it)
+                }
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        updateUI()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getFavoriteLinks()
+        }
     }
 
-    private fun updateUI() {
-        val db = FavoriteLinksDatabase.getDatabase(requireActivity().applicationContext)
-        var contactsList: List<FavoriteLink>
-        CoroutineScope(Dispatchers.IO).launch {
-            contactsList = db.contactDAO().getFavoriteLinks()
-            favoriteLinkAdapter = FavoriteLinkAdapter(this@FavoriteLinksListFragment).apply {
-                submitList(contactsList)
-            }
+    private fun updateUI(favoriteLinks: List<FavoriteLink>) {
+        favoriteLinkAdapter = FavoriteLinkAdapter(this@FavoriteLinksListFragment).apply {
+            submitList(favoriteLinks)
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
             withContext(Dispatchers.Main) {
                 binding.recyclerview.adapter = favoriteLinkAdapter
             }
@@ -88,11 +102,19 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
         val bundle = Bundle()
         bundle.putParcelable("favoriteLink", favoriteLink)
         findNavController().navigate(
-            R.id.action_contactsListFragment_to_contactDetailFragment, bundle
+            R.id.actionListToWeb, bundle
         )
     }
 
-    override fun onFavoriteLinkCLongClick(favoriteLink: FavoriteLink) {
-        TODO("Not yet implemented")
+    override fun onEditClick(favoriteLink: FavoriteLink) {
+        val bundle = Bundle()
+        bundle.putParcelable("favoriteLink", favoriteLink)
+        findNavController().navigate(
+            R.id.actionListToEdit, bundle
+        )
+    }
+
+    override fun onDeleteClick(favoriteLink: FavoriteLink) {
+        viewModel.deleteFavoriteLink(favoriteLink)
     }
 }

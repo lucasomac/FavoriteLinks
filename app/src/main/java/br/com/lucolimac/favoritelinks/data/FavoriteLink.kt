@@ -1,4 +1,4 @@
-package br.com.lucolimac.qrmanager.data
+package br.com.lucolimac.favoritelinks.data
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -12,5 +12,5 @@ data class FavoriteLink(
     val title: String,
     val description: String?,
     val url: String,
-    val counter: Long = 0
+    var counter: Long = 0
 ) : Parcelable
