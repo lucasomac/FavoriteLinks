@@ -9,4 +9,6 @@
     <string name="description">Descrição:</string>
     <string name="link">Link:</string>
     <string name="edit">Editar</string>
+    <string name="press_and_hold">Pressione e segure para mais ações</string>
+    <string name="access_number">Acessos: %1s</string>
 </resources>

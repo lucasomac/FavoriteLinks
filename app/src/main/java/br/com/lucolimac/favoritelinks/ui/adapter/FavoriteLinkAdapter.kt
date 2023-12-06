@@ -34,7 +34,8 @@ class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickLi
         fun bind(favoriteLink: FavoriteLink) {
             view.title.text = favoriteLink.title
             view.descriptionSubject.text = favoriteLink.description
-            view.counterEntrance.text = favoriteLink.counter.toString()
+            view.counterEntrance.text =
+                view.root.context.getString(R.string.access_number, favoriteLink.counter.toString())
             view.root.setOnClickListener {
                 onFavoriteClickListener.onFavoriteLinkClick(favoriteLink)
             }

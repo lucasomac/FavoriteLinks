@@ -7,7 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -53,10 +53,10 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 // Add menu items here
                 menuInflater.inflate(R.menu.main_menu, menu)
-                val searchView = menu.findItem(R.id.actionSearch).actionView as? SearchView
-                searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                val searchView = menu.findItem(R.id.actionSearch).actionView as SearchView
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(p0: String?): Boolean {
-                        TODO("Not yet implemented")
+                        return true
                     }
 
                     override fun onQueryTextChange(p0: String?): Boolean {
