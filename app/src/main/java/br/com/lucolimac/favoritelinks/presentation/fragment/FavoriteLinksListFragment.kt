@@ -1,4 +1,4 @@
-package br.com.lucolimac.favoritelinks.ui.fragment
+package br.com.lucolimac.favoritelinks.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,11 +16,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.favoritelinks.R
-import br.com.lucolimac.favoritelinks.data.FavoriteLink
 import br.com.lucolimac.favoritelinks.databinding.FragmentFavoriteLinksListBinding
-import br.com.lucolimac.favoritelinks.ui.adapter.FavoriteLinkAdapter
-import br.com.lucolimac.favoritelinks.ui.componnets.OnFavoriteClickListener
-import br.com.lucolimac.favoritelinks.ui.viewmodel.FavoriteLinkViewModel
+import br.com.lucolimac.favoritelinks.domain.entity.FavoriteLink
+import br.com.lucolimac.favoritelinks.presentation.adapter.FavoriteLinkAdapter
+import br.com.lucolimac.favoritelinks.presentation.componnets.OnFavoriteClickListener
+import br.com.lucolimac.favoritelinks.presentation.viewmodel.FavoriteLinkViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -73,7 +73,7 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.listOfFavoriteLinks.collect {
+                viewModel.listOfFavoriteLinksModel.collect {
                     updateUI(it)
                 }
             }
@@ -87,9 +87,9 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
         }
     }
 
-    private fun updateUI(favoriteLinks: List<FavoriteLink>) {
+    private fun updateUI(favoriteLink: List<FavoriteLink>) {
         favoriteLinkAdapter = FavoriteLinkAdapter(this@FavoriteLinksListFragment).apply {
-            submitList(favoriteLinks)
+            submitList(favoriteLink)
         }
         viewLifecycleOwner.lifecycleScope.launch {
             withContext(Dispatchers.Main) {
@@ -100,7 +100,7 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
 
     override fun onFavoriteLinkClick(favoriteLink: FavoriteLink) {
         val bundle = Bundle()
-        bundle.putParcelable("favoriteLink", favoriteLink)
+        bundle.putParcelable("favoriteLinkModel", favoriteLink)
         findNavController().navigate(
             R.id.actionListToWeb, bundle
         )
@@ -108,7 +108,7 @@ class FavoriteLinksListFragment : Fragment(), OnFavoriteClickListener {
 
     override fun onEditClick(favoriteLink: FavoriteLink) {
         val bundle = Bundle()
-        bundle.putParcelable("favoriteLink", favoriteLink)
+        bundle.putParcelable("favoriteLinkModel", favoriteLink)
         findNavController().navigate(
             R.id.actionListToEdit, bundle
         )

@@ -1,4 +1,4 @@
-package br.com.lucolimac.favoritelinks.ui.fragment
+package br.com.lucolimac.favoritelinks.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import br.com.lucolimac.favoritelinks.R
-import br.com.lucolimac.favoritelinks.data.FavoriteLink
 import br.com.lucolimac.favoritelinks.databinding.FragmentFavoriteLinkRegisterBinding
-import br.com.lucolimac.favoritelinks.ui.viewmodel.FavoriteLinkViewModel
+import br.com.lucolimac.favoritelinks.domain.entity.FavoriteLink
+import br.com.lucolimac.favoritelinks.presentation.viewmodel.FavoriteLinkViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteLinkRegisterFragment : Fragment() {

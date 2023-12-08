@@ -1,4 +1,4 @@
-package br.com.lucolimac.favoritelinks.ui.fragment
+package br.com.lucolimac.favoritelinks.presentation.fragment
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import br.com.lucolimac.favoritelinks.data.FavoriteLink
 import br.com.lucolimac.favoritelinks.databinding.FragmentFavoriteLinkWebBinding
-import br.com.lucolimac.favoritelinks.ui.viewmodel.FavoriteLinkViewModel
+import br.com.lucolimac.favoritelinks.domain.entity.FavoriteLink
+import br.com.lucolimac.favoritelinks.presentation.viewmodel.FavoriteLinkViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteLinkWebFragment : Fragment() {
@@ -28,7 +28,7 @@ class FavoriteLinkWebFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favoriteLink = requireArguments().getParcelable(
-            "favoriteLink", FavoriteLink::class.java
+            "favoriteLinkModel", FavoriteLink::class.java
         ) as FavoriteLink
         with(binding.webview) {
             setWebViewClient(this)

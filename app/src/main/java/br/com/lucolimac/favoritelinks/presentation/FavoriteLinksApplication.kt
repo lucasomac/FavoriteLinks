@@ -1,4 +1,4 @@
-package br.com.lucolimac.favoritelinks.ui
+package br.com.lucolimac.favoritelinks.presentation
 
 import android.app.Application
 import br.com.lucolimac.favoritelinks.framework.di.Dependencies.favoriteLinksModule

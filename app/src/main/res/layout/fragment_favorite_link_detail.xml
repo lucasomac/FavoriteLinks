@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.FavoriteLinkDetailFragment">
+    tools:context=".presentation.fragment.FavoriteLinkDetailFragment">
 
     <include
         android:id="@+id/common_layout"

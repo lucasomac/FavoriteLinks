@@ -1,4 +1,4 @@
-package br.com.lucolimac.favoritelinks.ui.adapter
+package br.com.lucolimac.favoritelinks.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.lucolimac.favoritelinks.R
-import br.com.lucolimac.favoritelinks.data.FavoriteLink
 import br.com.lucolimac.favoritelinks.databinding.FavoriteLinkCellBinding
-import br.com.lucolimac.favoritelinks.ui.componnets.OnFavoriteClickListener
+import br.com.lucolimac.favoritelinks.domain.entity.FavoriteLink
+import br.com.lucolimac.favoritelinks.presentation.componnets.OnFavoriteClickListener
 
 class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickListener) :
     ListAdapter<FavoriteLink, FavoriteLinkAdapter.ContactViewHolder>(diffCallback), Filterable {
@@ -65,11 +65,15 @@ class FavoriteLinkAdapter(private val onFavoriteClickListener: OnFavoriteClickLi
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<FavoriteLink>() {
-            override fun areItemsTheSame(oldItem: FavoriteLink, newItem: FavoriteLink): Boolean {
+            override fun areItemsTheSame(
+                oldItem: FavoriteLink, newItem: FavoriteLink
+            ): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: FavoriteLink, newItem: FavoriteLink): Boolean {
+            override fun areContentsTheSame(
+                oldItem: FavoriteLink, newItem: FavoriteLink
+            ): Boolean {
                 return oldItem == newItem
             }
         }

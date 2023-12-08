@@ -1,4 +1,4 @@
-package br.com.lucolimac.favoritelinks.ui.activity
+package br.com.lucolimac.favoritelinks.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

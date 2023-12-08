@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="br.com.lucolimac.favoritelinks.ui.fragment.FavoriteLinksListFragment"
+        android:name="br.com.lucolimac.favoritelinks.presentation.fragment.FavoriteLinksListFragment"
         android:label="Links Favoritos"
         tools:layout="@layout/fragment_favorite_links_list">
         <action
@@ -22,17 +22,17 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="br.com.lucolimac.favoritelinks.ui.fragment.FavoriteLinkRegisterFragment"
+        android:name="br.com.lucolimac.favoritelinks.presentation.fragment.FavoriteLinkRegisterFragment"
         android:label="Cadastrar Favorito"
         tools:layout="@layout/fragment_favorite_link_register" />
     <fragment
         android:id="@+id/webFragment"
-        android:name="br.com.lucolimac.favoritelinks.ui.fragment.FavoriteLinkWebFragment"
+        android:name="br.com.lucolimac.favoritelinks.presentation.fragment.FavoriteLinkWebFragment"
         android:label="Ver Favorito"
         tools:layout="@layout/fragment_favorite_link_web" />
     <fragment
         android:id="@+id/editFragment"
-        android:name="br.com.lucolimac.favoritelinks.ui.fragment.FavoriteLinkDetailFragment"
+        android:name="br.com.lucolimac.favoritelinks.presentation.fragment.FavoriteLinkDetailFragment"
         android:label="Alterar link favorito"
         tools:layout="@layout/fragment_favorite_link_detail" />
 </navigation>

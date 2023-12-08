@@ -1,6 +1,6 @@
-package br.com.lucolimac.favoritelinks.ui.componnets
+package br.com.lucolimac.favoritelinks.presentation.componnets
 
-import br.com.lucolimac.favoritelinks.data.FavoriteLink
+import br.com.lucolimac.favoritelinks.domain.entity.FavoriteLink
 
 interface OnFavoriteClickListener {
     fun onFavoriteLinkClick(favoriteLink: FavoriteLink)
